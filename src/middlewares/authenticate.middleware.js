@@ -14,7 +14,7 @@ export const authenticate = async (req, res, next) => {
 
   try {
     const payload = jwtService.verify(token);
-    const user = await userService.findById(payload.sub);
+    const user = await userService.findById(payload.id);
     if (!user) {
       createError(404, 'User not found');
     }
@@ -26,6 +26,7 @@ export const authenticate = async (req, res, next) => {
     if (error.name === 'JsonWebTokenError') {
       createError(401, 'Invalid token');
     }
+    throw err;
   }
   next();
 };

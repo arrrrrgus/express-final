@@ -28,6 +28,11 @@ authService.login = async (email, passwordHash) => {
     sub: user.id,
     email: user.email,
   });
-  const { passwordHash: _, ...userWithoutPassword } = user;
+  const {
+    passwordHash: _,
+    createdAt: __,
+    updateAt: ___,
+    ...userWithoutPassword
+  } = user;
   return { access_token, user: userWithoutPassword };
 };

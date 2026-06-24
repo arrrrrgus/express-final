@@ -13,6 +13,11 @@ datasource db {
   provider = "postgresql"
 }
 
+enum Status {
+  ACTIVE
+  BANNED
+}
+
 model User {
   id           Int       @id @unique @default(autoincrement())
   email        String    @unique
@@ -20,6 +25,7 @@ model User {
   name         String?   @db.VarChar(30)
   createdAt    DateTime  @default(now()) @db.Timestamptz(3)
   updateAt     DateTime  @default(now()) @updatedAt
+  status       Status    @default(ACTIVE)
   expenses     Expense[]
 
   @@map("Users")

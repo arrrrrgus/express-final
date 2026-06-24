@@ -2,7 +2,7 @@ import z from 'zod';
 import { createError } from '../utils/create.error.js';
 
 export const validate = (schemas) => (req, res, next) => {
-  console.log('schemas.body');
+  // console.log(req.body);
   if (schemas.body) {
     const result = schemas.body.safeParse(req.body);
     if (!result.success) {
@@ -16,7 +16,6 @@ export const validate = (schemas) => (req, res, next) => {
   }
 
   if (schemas.params) {
-    console.log('schemas.params');
     const result = schemas.params.safeParse(req.params);
     if (!result.success) {
       createError(

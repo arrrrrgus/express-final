@@ -10,7 +10,7 @@ const passwordSchema = z
 export const registerSchema = z.object({
   email: z.email('invalid email address'),
   passwordHash: passwordSchema,
-  name: z.string().nullable(),
+  name: z.string().nullable().optional(),
 });
 
 export const loginSchema = z.object({
