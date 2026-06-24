@@ -54,3 +54,21 @@ expensesService.update = async (expenseId, userId, input) => {
     data: { ...input },
   });
 };
+
+expensesService.delete = async (expenseId, userId) => {
+  const data = await prisma.expense.findUnique({
+    where: { id: expenseId },
+  });
+  if (!data.id) {
+    throw createError(
+      404,
+      `Expense record with expenseId ${expenseId} not found`,
+    );
+  }
+  if (userId !== data.userId) {
+    throw createError(403, 'You do not have permission to access this record');
+  }
+  return prisma.expense.delete({
+    where: { id: expenseId },
+  });
+};

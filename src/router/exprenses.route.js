@@ -33,3 +33,10 @@ expensesRouter.put(
   validate({ body: updateExpensesSchema, params: intIdSchema }),
   expensesController.update,
 );
+
+expensesRouter.delete(
+  '/:expenseId',
+  authenticate,
+  validate({ params: intIdSchema }),
+  expensesController.delete,
+);

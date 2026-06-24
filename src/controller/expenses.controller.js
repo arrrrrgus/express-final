@@ -27,3 +27,10 @@ expensesController.update = async (req, res) => {
   const data = await expensesService.update(expenseId, currentUserId, req.body);
   res.status(200).json({ success: true, data });
 };
+
+expensesController.delete = async (req, res) => {
+  const currentUserId = req.user.id;
+  const { expenseId } = req.params;
+  const data = await expensesService.delete(expenseId, currentUserId);
+  res.status(204).send();
+};
