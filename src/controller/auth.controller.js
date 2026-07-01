@@ -6,10 +6,11 @@ export const authController = {};
 authController.register = async (req, res) => {
   const data = await authService.register(req.body);
   successData(res, 201, {
-    id: req.user.id,
-    email: req.user.email,
-    name: req.user.name,
+    id: data.id,
+    email: data.email,
+    name: data?.name,
   });
+  console.log(data, 'data');
 };
 
 authController.login = async (req, res) => {

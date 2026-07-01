@@ -7,11 +7,12 @@ export const authService = {};
 
 authService.register = async (input) => {
   const hash = await hashService.hash(input.passwordHash);
-  await userService.create({
+  const data = await userService.create({
     email: input.email,
     passwordHash: hash,
     name: input.name,
   });
+  return data;
 };
 
 authService.login = async (email, passwordHash) => {
