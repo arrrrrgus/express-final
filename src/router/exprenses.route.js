@@ -12,7 +12,7 @@ export const expensesRouter = Router();
 
 expensesRouter.use(authenticate);
 
-expensesRouter.get('/', authenticate, expensesController.getAll);
+expensesRouter.get('/', expensesController.getAll);
 
 expensesRouter.post(
   '/',
@@ -22,21 +22,18 @@ expensesRouter.post(
 
 expensesRouter.get(
   '/:expenseId',
-  authenticate,
   validate({ params: intIdSchema }),
   expensesController.getId,
 );
 
 expensesRouter.put(
   '/:expenseId',
-  authenticate,
   validate({ body: updateExpensesSchema, params: intIdSchema }),
   expensesController.update,
 );
 
 expensesRouter.delete(
   '/:expenseId',
-  authenticate,
   validate({ params: intIdSchema }),
   expensesController.delete,
 );

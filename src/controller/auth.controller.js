@@ -4,8 +4,12 @@ import { successData } from '../utils/success.js';
 export const authController = {};
 
 authController.register = async (req, res) => {
-  await authService.register(req.body);
-  successData(res, 201, data);
+  const data = await authService.register(req.body);
+  successData(res, 201, {
+    id: req.user.id,
+    email: req.user.email,
+    name: req.user.name,
+  });
 };
 
 authController.login = async (req, res) => {
@@ -15,8 +19,9 @@ authController.login = async (req, res) => {
 };
 
 authController.getMe = (req, res) => {
-  res.status(200).json({
-    success: true,
-    data: { id: req.user.id, email: req.user.email, name: req.user.name },
+  successData(res, 200, {
+    id: req.user.id,
+    email: req.user.email,
+    name: req.user.name,
   });
 };
